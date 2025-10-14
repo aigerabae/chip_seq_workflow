@@ -1,0 +1,54 @@
+Looking at header of bam alignment file:
+```bash
+samtools head HB_Lmo2_aligned_sorted.bam
+samtools head HB_Tal1_aligned_sorted.bam
+samtools head HB_input_aligned_sorted.bam
+```
+This contains info on reference genome, what aligner was used and versions
+
+Duplicates removing:
+```bash
+java -jar ../../software/picard.jar MarkDuplicates INPUT=HB_Lmo2_aligned_sorted.bam OUTPUT=HB_Lmo2_aligned_sorted_noDups.bam METRICS_FILE=HB_Lmo2_aligned_sorted_noDups.txt REMOVE_DUPLICATES=true ASSUME_SORTED=true
+java -jar ../../software/picard.jar MarkDuplicates INPUT=HB_Tal1_aligned_sorted.bam OUTPUT=HB_Tal1_aligned_sorted_noDups.bam METRICS_FILE=HB_Tal1_aligned_sorted_noDups.txt REMOVE_DUPLICATES=true ASSUME_SORTED=true
+java -jar ../../software/picard.jar MarkDuplicates INPUT=HB_input_aligned_sorted.bam OUTPUT=HB_input_aligned_sorted_noDups.bam METRICS_FILE=HB_input_aligned_sorted_noDups.txt REMOVE_DUPLICATES=true ASSUME_SORTED=true
+```
+Text files created have info on duplicates removed, number of paired-end and single-end reads
+Explanation of output example:
+```output
+LIBRARY = Unknown Library
+The read group (@RG) in your BAM has no LB: tag, so Picard can’t name the library. (You can add it with picard AddOrReplaceReadGroups.)
+
+UNPAIRED_READS_EXAMINED = 20,725,662
+Number of mapped, primary single-end reads that Picard actually examined for duplicates. (Pairs are zero, so everything is treated as unpaired.)
+
+READ_PAIRS_EXAMINED = 0
+No paired-end fragments were examined—this is a single-end BAM or lacks proper pairing flags.
+
+SECONDARY_OR_SUPPLEMENTARY_RDS = 0
+Count of secondary (0x100) or supplementary (0x800) alignments Picard saw but excluded from duplicate marking. Hero it’s zero.
+
+UNMAPPED_READS = 25,917,921
+Primary reads with the unmapped flag (0x4). Reported but not considered for duplicate detection. (Example - can be mapping rate ≈ 44%.)
+
+UNPAIRED_READ_DUPLICATES = 7,952,974
+Among the unpaired reads examined, this many were flagged as duplicates (same start position/strand after optical duplicate filtering).
+
+READ_PAIR_DUPLICATES = 0
+Duplicate pairs (for PE data). Zero because you have no pairs.
+
+READ_PAIR_OPTICAL_DUPLICATES = 0
+Optical duplicates among pairs (detected by proximity on flowcell). Zero since there are no pairs.
+
+PERCENT_DUPLICATION = 0.383726
+Fraction of examined reads marked duplicate. For single-end, roughly
+UNPAIRED_READ_DUPLICATES / UNPAIRED_READS_EXAMINED ≈ 7,952,974 / 20,725,662 ≈ 0.3837.
+
+ESTIMATED_LIBRARY_SIZE = (blank)
+Picard couldn’t estimate library complexity (often happens with single-end data, high duplication, or insufficient unique reads).
+```
+
+Peak calling:
+```bash
+macs2 callpeak -t HB_Lmo2_aligned_sorted_noDups.bam -c HB_input_aligned_sorted_noDups.bam -f BAM -g mm -n lmo2 -q 0.05 --keep-dup auto -B --trackline<img width="477" height="80" alt="image" src="https://github.com/user-attachments/assets/f6740387-4c56-4817-a700-406d2174e4be" />
+```
+
