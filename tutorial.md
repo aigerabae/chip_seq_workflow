@@ -1,4 +1,4 @@
-Looking at header of bam alignment file:
+<img width="477" height="109" alt="image" src="https://github.com/user-attachments/assets/360ae054-6eb7-4e42-9c66-11b45148db94" /><img width="477" height="139" alt="image" src="https://github.com/user-attachments/assets/a608947f-35e1-498f-842c-142d51fe13c0" />Looking at header of bam alignment file:
 ```bash
 samtools head HB_Lmo2_aligned_sorted.bam
 samtools head HB_Tal1_aligned_sorted.bam
@@ -52,3 +52,16 @@ Peak calling:
 macs2 callpeak -t HB_Lmo2_aligned_sorted_noDups.bam -c HB_input_aligned_sorted_noDups.bam -f BAM -g mm -n lmo2 -q 0.05 --keep-dup auto -B --trackline<img width="477" height="80" alt="image" src="https://github.com/user-attachments/assets/f6740387-4c56-4817-a700-406d2174e4be" />
 ```
 
+A number of new files have been created for the treat pile-up or read coverage (ending in _treat_pileup.bdg), the background model (ending with _control_lambda.bdg and _model.r) and finally the called peaks (ending with  _peaks.xls, _summits.bed and _peaks.narrowPeak). Inspect the peak files to identify peaks.
+
+Removing blacklisted regions:
+```bash
+bedtools intersect -a lmo2_summits.bed -b annotation_files/mm10_simpleRepeat.bed -v | bedtools intersect -a - -b annotation_files/mm10-blacklist.bed -v > lmo2_noBL_summits.bed
+bedtools intersect -a tal1_summits.bed -b annotation_files/mm10_simpleRepeat.bed -v | bedtools intersect -a - -b annotation_files/mm10-blacklist.bed -v > tal1_noBL_summits.bed
+```
+
+Get peaks from summit files:
+```bash
+cut -f4 lmo2_noBL_summits.bed | grep -Fwf - lmo2_peaks.narrowPeak | grep -v chrUn | grep -v chrM | grep -v random > lmo2_filtered_peaks.bed
+cut -f4 tal1_noBL_summits.bed | grep -Fwf - tal1_peaks.narrowPeak | grep -v chrUn | grep -v chrM | grep -v random > tal1_filtered_peaks.bed
+```
