@@ -1,4 +1,4 @@
-<img width="477" height="109" alt="image" src="https://github.com/user-attachments/assets/360ae054-6eb7-4e42-9c66-11b45148db94" /><img width="477" height="139" alt="image" src="https://github.com/user-attachments/assets/a608947f-35e1-498f-842c-142d51fe13c0" />Looking at header of bam alignment file:
+Looking at header of bam alignment file:
 ```bash
 samtools head HB_Lmo2_aligned_sorted.bam
 samtools head HB_Tal1_aligned_sorted.bam
