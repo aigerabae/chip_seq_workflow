@@ -1,3 +1,15 @@
+From raw Chip-Seq data to results:
+
+Aligning with bowtie (example for 1 file):
+```bash
+/rds/bear-apps/2019b/EL8-cas/software/Bowtie2/2.3.5.1-GCC-8.3.0/bin/bowtie2-align-s --wrapper basic-0 -p 8 --very-sensitive-local -x /rds/projects/c/cazierj-ccbservice/Genomes/Mouse/mm10/bowtie2_indices/mm10 -S HB_Tal1_aligned.sam -U ./HB_Tal1.fastq.gz"
+```
+
+Sorting with samtools:
+```bash
+samtools sort HB_Tal1_aligned.sam
+```
+
 Looking at header of bam alignment file:
 ```bash
 samtools head HB_Lmo2_aligned_sorted.bam
