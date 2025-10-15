@@ -24,7 +24,9 @@ java -jar ../../software/picard.jar MarkDuplicates INPUT=HB_Lmo2_aligned_sorted.
 java -jar ../../software/picard.jar MarkDuplicates INPUT=HB_Tal1_aligned_sorted.bam OUTPUT=HB_Tal1_aligned_sorted_noDups.bam METRICS_FILE=HB_Tal1_aligned_sorted_noDups.txt REMOVE_DUPLICATES=true ASSUME_SORTED=true
 java -jar ../../software/picard.jar MarkDuplicates INPUT=HB_input_aligned_sorted.bam OUTPUT=HB_input_aligned_sorted_noDups.bam METRICS_FILE=HB_input_aligned_sorted_noDups.txt REMOVE_DUPLICATES=true ASSUME_SORTED=true
 ```
-Text files created have info on duplicates removed, number of paired-end and single-end reads
+
+Text files created have info on duplicates removed, number of paired-end and single-end reads.
+
 Explanation of output example:
 ```output
 LIBRARY = Unknown Library
