@@ -79,3 +79,63 @@ Get peaks from summit files:
 cut -f4 lmo2_noBL_summits.bed | grep -Fwf - lmo2_peaks.narrowPeak | grep -v chrUn | grep -v chrM | grep -v random > lmo2_filtered_peaks.bed
 cut -f4 tal1_noBL_summits.bed | grep -Fwf - tal1_peaks.narrowPeak | grep -v chrUn | grep -v chrM | grep -v random > tal1_filtered_peaks.bed
 ```
+
+Visualizing in IGV:
+```python
+# Load the igv_notebook package
+import igv_notebook
+
+# Initialise a session and load the data
+igv_notebook.init()
+
+igv_browser= igv_notebook.Browser(
+    {
+        "genome": "mm10",
+        "tracks": [{
+            "name": "Tal1",
+            "path": "./results/tal1_treat_pileup.bdg.tdf",
+            "format": "tdf"
+        },
+        {
+            "name": "Lmo2",
+            "path": "./results/lmo2_treat_pileup.bdg.tdf",
+            "format": "tdf"
+        }]
+    }
+)
+```
+
+Visualizing filtered peaks:
+```python
+# Load the igv_notebook package
+import igv_notebook
+
+# Initialise a session and load the data
+igv_notebook.init()
+
+igv_browser= igv_notebook.Browser(
+    {
+        "genome": "mm10",
+        "tracks": [{
+            "name": "Tal1",
+            "path": "./results/tal1_treat_pileup.bdg.tdf",
+            "format": "tdf"
+        },
+        {
+            "name": "Lmo2",
+            "path": "./results/lmo2_treat_pileup.bdg.tdf",
+            "format": "tdf"
+        },
+        {
+            "name": "Tal1 peaks",
+            "path": "tal1_filtered_peaks.bed",
+            "format": "bed"
+        },
+        {
+            "name": "Lmo2 peaks",
+            "path": "lmo2_filtered_peaks.bed",
+            "format": "bed"
+        }]
+    }
+)
+```
