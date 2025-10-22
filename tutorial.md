@@ -66,17 +66,19 @@ Picard couldn’t estimate library complexity (often happens with single-end dat
 ### 2) Peak calling:
 ```bash
 #breaking down all option, input and output
-macs2 callpeak
-  -t HB_Tal1_aligned_sorted_noDups.bam     # treatment: TAL1 ChIP BAM
-  -c HB_input_aligned_sorted_noDups.bam    # control: input DNA BAM (background)
-  -f BAM                                   # file format is BAM (single-end). For PE use -f BAMPE
-  -g mm                                    # effective genome size: mouse (mm10 ~1.87e9)
-  -n tal1                                  # output name prefix “tal1”
-  -q 0.05                                  # FDR threshold 5% for calling peaks
-  --keep-dup auto                          # allow identical start sites up to a data-driven cap
-  -B                                       # write bedGraph signal tracks (pileup & lambda)
-  --trackline                              # add UCSC track lines to bedGraphs
+#macs2 callpeak 
+#  -t HB_Tal1_aligned_sorted_noDups.bam     # treatment: TAL1 ChIP BAM
+#  -c HB_input_aligned_sorted_noDups.bam    # control: input DNA BAM (background)
+#  -f BAM                                   # file format is BAM (single-end). For PE use -f BAMPE
+#  -g mm                                    # effective genome size: mouse (mm10 ~1.87e9)
+#  -n tal1                                  # output name prefix “tal1”
+#  -q 0.05                                  # FDR threshold 5% for calling peaks
+#  --keep-dup auto                          # allow identical start sites up to a data-driven cap
+#  -B                                       # write bedGraph signal tracks (pileup & lambda)
+#  --trackline                              # add UCSC track lines to bedGraphs
 
+#actual commands for 2 files:
+macs2 callpeak -t HB_Tal1_aligned_sorted_noDups.bam -c HB_input_aligned_sorted_noDups.bam -f BAM -g mm -n lmo2 -q 0.05 --keep-dup auto -B --trackline
 macs2 callpeak -t HB_Lmo2_aligned_sorted_noDups.bam -c HB_input_aligned_sorted_noDups.bam -f BAM -g mm -n lmo2 -q 0.05 --keep-dup auto -B --trackline
 ```
   
