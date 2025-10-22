@@ -143,7 +143,7 @@ igv_browser= igv_notebook.Browser(
 
 
 Comparative analysis:
-Finding which peaks are specific for each cell type:
+Finding which peaks are specific for each cell type (-v option excludes, and -u option combines, -a and -b specify the input files):
 ```bash
 bedtools intersect -a lmo2_filtered_peaks.bed -b tal1_filtered_peaks.bed -v > lmo2_specific.bed
 bedtools intersect -a lmo2_filtered_peaks.bed -b tal1_filtered_peaks.bed -u > shared_peaks.bed
