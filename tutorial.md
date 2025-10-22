@@ -80,7 +80,7 @@ cut -f4 lmo2_noBL_summits.bed | grep -Fwf - lmo2_peaks.narrowPeak | grep -v chrU
 cut -f4 tal1_noBL_summits.bed | grep -Fwf - tal1_peaks.narrowPeak | grep -v chrUn | grep -v chrM | grep -v random > tal1_filtered_peaks.bed
 ```
 
-Visualizing in IGV:
+Visualizing in IGV (doesn't work, says image out of bounds for the first 2 tracks):
 ```python
 # Load the igv_notebook package
 import igv_notebook
@@ -105,7 +105,7 @@ igv_browser= igv_notebook.Browser(
 )
 ```
 
-Visualizing filtered peaks:
+Visualizing filtered peaks (doesn't work, says image out of bounds for the first 2 tracks):
 ```python
 # Load the igv_notebook package
 import igv_notebook
@@ -139,3 +139,7 @@ igv_browser= igv_notebook.Browser(
     }
 )
 ```
+
+
+Comparative analysis:
+<img width="883" height="784" alt="image" src="https://github.com/user-attachments/assets/053625b7-a11c-4965-8b65-481a4c7e9a59" />
