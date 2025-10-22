@@ -220,5 +220,9 @@ Input:
   
 Output:  
 - lmo2_peaks_annotation.tsv – with annotation (main!)  
-- lmo2_peaks_annstats.tsv (from -annStats) – with annotation stats (a summary table of counts/percentages by annotation category and distance bins (e.g., how many peaks in promoters, introns, intergenic, within ±1 kb of TSS, etc.).)  
+- lmo2_peaks_annstats.tsv (from -annStats) – with annotation stats (a summary table of counts/percentages by annotation category and distance bins (e.g., how many peaks in promoters, introns, intergenic, within ±1 kb of TSS, etc.).) In the annStat files, the enrichment of features in the peaks, log2(obs/exp), is reported. If this number is positive, the observed number is higher than expected. The significance of the enrichment is reported as raw log p-values. The sign of the raw log p-value should be negative. As there are 12 annotation categories tested, we should apply a multiple testing correction.
+
 - lmo2_peaks_homer.out - log: progress, genome loading, numbers of peaks processed, warnings (e.g., unmapped chromosomes), parameter echo, any errors.  
+
+
+GO and KEGG enrichment saved in R file in this directory
