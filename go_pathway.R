@@ -1,6 +1,6 @@
 ## 3.	Gene Ontology (GO) category-based enrichment.
-Cellular pathways define a broad function within a cell, whereas Gene Ontology categories (Biological process, BP and Molecular function, MF) define a more precise function. Hence GO categories can give a finer resolution of the functional phenotype for a list of genes. You would test enrichment for the MF and BP classes of GO categories. There is also a third class of GO category: Cellular component (CC), enrichment analysis for whom makes sense when you suspect your genes to belong to specific cellular compartment such as lysosome or cell membrane.
-
+##Cellular pathways define a broad function within a cell, whereas Gene Ontology categories (Biological process, BP and Molecular function, MF) define a more precise function. Hence GO categories can give a finer resolution of the functional phenotype for a list of genes. You would test enrichment for the MF and BP classes of GO categories. There is also a third class of GO category: Cellular component (CC), enrichment analysis for whom makes sense when you suspect your genes to belong to specific cellular compartment such as lysosome or cell membrane.
+## Peak annotation can provide biological interpretation for a list of genomic regions that are otherwise difficult to interpret.
 
   ## For mouse genome annotation
 library(org.Mm.eg.db)
