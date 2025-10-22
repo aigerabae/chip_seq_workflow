@@ -142,4 +142,4 @@ igv_browser= igv_notebook.Browser(
 
 
 Comparative analysis:
-<img width="883" height="784" alt="image" src="https://github.com/user-attachments/assets/053625b7-a11c-4965-8b65-481a4c7e9a59" />
+<img width="583" height="484" alt="image" src="https://github.com/user-attachments/assets/053625b7-a11c-4965-8b65-481a4c7e9a59" />
