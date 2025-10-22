@@ -1,6 +1,7 @@
 From raw Chip-Seq data to results:
 <img width="583" height="484" alt="image" src="https://github.com/user-attachments/assets/053625b7-a11c-4965-8b65-481a4c7e9a59" />
 
+### 1) QC
 Aligning with bowtie (example for 1 file):
 ```bash
 /rds/bear-apps/2019b/EL8-cas/software/Bowtie2/2.3.5.1-GCC-8.3.0/bin/bowtie2-align-s --wrapper basic-0 -p 8 --very-sensitive-local -x /rds/projects/c/cazierj-ccbservice/Genomes/Mouse/mm10/bowtie2_indices/mm10 -S HB_Tal1_aligned.sam -U ./HB_Tal1.fastq.gz"
@@ -62,10 +63,11 @@ ESTIMATED_LIBRARY_SIZE = (blank)
 Picard couldn’t estimate library complexity (often happens with single-end data, high duplication, or insufficient unique reads).
 ```
 
-Peak calling:
+### 2) Peak calling:
 ```bash
 macs2 callpeak -t HB_Lmo2_aligned_sorted_noDups.bam -c HB_input_aligned_sorted_noDups.bam -f BAM -g mm -n lmo2 -q 0.05 --keep-dup auto -B --trackline<img width="477" height="80" alt="image" src="https://github.com/user-attachments/assets/f6740387-4c56-4817-a700-406d2174e4be" />
 ```
+  
 **How MACs work**:  
 - **A per-base coverage track** is a genome track where every single nucleotide position has a number: how many sequencing fragments overlap that base.  
     - What it represents: at position i on chr1, the value is the count of reads/fragments covering that base. Do this for base 1, base 2, base 3… across the genome → you get a “track” of coverage.  
@@ -181,7 +183,7 @@ igv_browser= igv_notebook.Browser(
 ```
 
 
-Comparative analysis:
+### 3) Comparative analysis:
 Finding which peaks are specific for each cell type (-v option excludes, and -u option combines, -a and -b specify the input files):
 ```bash
 bedtools intersect -a lmo2_filtered_peaks.bed -b tal1_filtered_peaks.bed -v > lmo2_specific.bed
