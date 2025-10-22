@@ -78,7 +78,7 @@ Picard couldn’t estimate library complexity (often happens with single-end dat
 #  --trackline                              # add UCSC track lines to bedGraphs
 
 #actual commands for 2 files:
-macs2 callpeak -t HB_Tal1_aligned_sorted_noDups.bam -c HB_input_aligned_sorted_noDups.bam -f BAM -g mm -n lmo2 -q 0.05 --keep-dup auto -B --trackline
+macs2 callpeak -t HB_Tal1_aligned_sorted_noDups.bam -c HB_input_aligned_sorted_noDups.bam -f BAM -g mm -n tal1 -q 0.05 --keep-dup auto -B --trackline
 macs2 callpeak -t HB_Lmo2_aligned_sorted_noDups.bam -c HB_input_aligned_sorted_noDups.bam -f BAM -g mm -n lmo2 -q 0.05 --keep-dup auto -B --trackline
 ```
   
