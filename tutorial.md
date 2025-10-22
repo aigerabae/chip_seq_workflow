@@ -149,3 +149,4 @@ bedtools intersect -a lmo2_filtered_peaks.bed -b tal1_filtered_peaks.bed -v > lm
 bedtools intersect -a lmo2_filtered_peaks.bed -b tal1_filtered_peaks.bed -u > shared_peaks.bed
 bedtools intersect -a tal1_filtered_peaks.bed -b lmo2_filtered_peaks.bed -v > tal1_specific.bed
 ```
+Shared ChIP-seq peaks of files indicate that they bind at the same site. However, without further wet lab experiments, we cannot tell if the TFs compete with each other at these shared binding sites, or if they act collaboratively and one is required for the recruitment of the other TF.
