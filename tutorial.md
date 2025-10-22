@@ -1,4 +1,5 @@
 From raw Chip-Seq data to results:
+<img width="583" height="484" alt="image" src="https://github.com/user-attachments/assets/053625b7-a11c-4965-8b65-481a4c7e9a59" />
 
 Aligning with bowtie (example for 1 file):
 ```bash
@@ -142,5 +143,9 @@ igv_browser= igv_notebook.Browser(
 
 
 Comparative analysis:
-
-<img width="583" height="484" alt="image" src="https://github.com/user-attachments/assets/053625b7-a11c-4965-8b65-481a4c7e9a59" />
+Finding which peaks are specific for each cell type:
+```bash
+bedtools intersect -a lmo2_filtered_peaks.bed -b tal1_filtered_peaks.bed -v > lmo2_specific.bed
+bedtools intersect -a lmo2_filtered_peaks.bed -b tal1_filtered_peaks.bed -u > shared_peaks.bed
+bedtools intersect -a tal1_filtered_peaks.bed -b lmo2_filtered_peaks.bed -v > tal1_specific.bed
+```
