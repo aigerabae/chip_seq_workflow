@@ -190,5 +190,21 @@ bedtools intersect -a lmo2_filtered_peaks.bed -b tal1_filtered_peaks.bed -v > lm
 bedtools intersect -a lmo2_filtered_peaks.bed -b tal1_filtered_peaks.bed -u > shared_peaks.bed
 bedtools intersect -a tal1_filtered_peaks.bed -b lmo2_filtered_peaks.bed -v > tal1_specific.bed
 ```
-Shared ChIP-seq peaks of files indicate that they bind at the same site. However, without further wet lab experiments, we cannot tell if the TFs compete with each other at these shared binding sites, or if they act collaboratively and one is required for the recruitment of the other TF.
+Shared ChIP-seq peaks of files indicate that they bind at the same site. However, without further wet lab experiments, we cannot tell if the TFs compete with each other at these shared binding sites, or if they act collaboratively and one is required for the recruitment of the other TF.  
 
+
+Annotating separate and common peaks with HOMER:
+```bash
+annotatePeaks.pl lmo2_specific.bed mm10 -annStats lmo2_peaks_annstats.tsv > lmo2_peaks_annotation.tsv 2> lmo2_peaks_homer.out
+annotatePeaks.pl tal1_specific.bed mm10 -annStats tal1_peaks_annstats.tsv > tal1_peaks_annotation.tsv 2> tal1_peaks_homer.out
+annotatePeaks.pl shared_peaks.bed mm10 -annStats shared_peaks_annstats.tsv > shared_peaks_annotation.tsv 2> shared_peaks_homer.out
+```
+
+Input:   
+- bed file with peaks  
+- genome version (example - mm10; hg18) - Must be installed in HOMER  
+  
+Output:  
+- lmo2_peaks_annotation.tsv – with annotation (main!)  
+- lmo2_peaks_annstats.tsv (from -annStats) – with annotation stats (a summary table of counts/percentages by annotation category and distance bins (e.g., how many peaks in promoters, introns, intergenic, within ±1 kb of TSS, etc.).)  
+- lmo2_peaks_homer.out - log: progress, genome loading, numbers of peaks processed, warnings (e.g., unmapped chromosomes), parameter echo, any errors.  
