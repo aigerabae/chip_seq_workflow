@@ -66,6 +66,44 @@ Peak calling:
 ```bash
 macs2 callpeak -t HB_Lmo2_aligned_sorted_noDups.bam -c HB_input_aligned_sorted_noDups.bam -f BAM -g mm -n lmo2 -q 0.05 --keep-dup auto -B --trackline<img width="477" height="80" alt="image" src="https://github.com/user-attachments/assets/f6740387-4c56-4817-a700-406d2174e4be" />
 ```
+How MACs work:
+A per-base coverage track is a genome track where every single nucleotide position has a number: how many sequencing fragments overlap that base.
+What it represents: at position i on chr1, the value is the count of reads/fragments covering that base. Do this for base 1, base 2, base 3… across the genome → you get a “track” of coverage.
+Why it’s useful: shows exactly where signal is high/low, allows you to see sharp peaks and summits (e.g., TF binding), and is the rawest view of enrichment before binning/smoothing.
+Input DNA (a.k.a. background control): genomic DNA from the same cells, processed the same way but without the IP (no antibody pulldown).
+treatment pileup: It’s a per-base coverage track of your ChIP (treatment) library after MACS2 has reconstructed fragments from reads.
+At each genomic base, the value is the number of inferred DNA fragments overlapping that base (sometimes a float due to internal scaling).
+MACS2 writes this to *_treat_pileup.bdg when you use -B.
+The ENCODE blacklist contains genomic regions which have anomalous, unstructured or high signals in sequencing data in all sequencing experiments, irrespective of cell type. These regions include, for example, repetitive regions, and have to be removed from the data.
+The MACS peak calling algorithm can call narrow or broad peaks. Narrow peaks are suitable for finding short genomic regions such as transcription factor binding sites. Broad peaks are often comparable to a gene’s length and can be used to identify where RNA Pol II of the transcription machinery is on the DNA (if you use antibodies for RNA pol ii)
+Narrow mode (default) finds sharp local maxima and keeps peaks small and distinct. Good for motif finding and precise summits.
+Broad mode (--broad, --broad-cutoff) merges adjacent enriched bins into longer regions, so you don’t split one gene-body signal into dozens of tiny peaks.
+key files:
+*_peaks.narrowPeak = the regions (only peaks)
+A list of start–end intervals where MACS2 says “there’s a real peak here.”
+Each row = one peak with stats (strength, p/q-values).
+Use when you need the peak regions themselves.
+*_summits.bed = the exact tip (same number of rows as narrowPeak)
+One point inside each peak: the highest point (the “summit”).
+Great for motif finding or pinpointing where binding is strongest.
+*_treat_pileup.bdg = the signal track (all nucleotides)
+A continuous curve: how much ChIP signal at each base across the genome.
+Looks like a waveform in IGV/UCSC; peaks rise above background.
+
+Steps:
+Filtering out duplicate reads.
+Building a background model for the peaks, against which the actual coverages can be compared.
+Peak detection against the computed background.
+Multiple testing correction using the Benjamini-Hochberg (aka FDR) correction.
+
+Options:
+-t: the treatment file name.
+-c: the control (ChIP-seq input) file name.
+-g: the genome used, to set the effective genome size
+--keep-dup: it sets if we should keep all duplicates (all) or remove all (1, default), or something in between.
+-q: Q-value cutoff for calling statistically significant peaks during the FDR correction.
+-B: If given, store the pile-up (i.e. the coverage track) in a bedgraph format.
+
 
 A number of new files have been created for the treat pile-up or read coverage (ending in _treat_pileup.bdg), the background model (ending with _control_lambda.bdg and _model.r) and finally the called peaks (ending with  _peaks.xls, _summits.bed and _peaks.narrowPeak). Inspect the peak files to identify peaks.
 
@@ -150,3 +188,4 @@ bedtools intersect -a lmo2_filtered_peaks.bed -b tal1_filtered_peaks.bed -u > sh
 bedtools intersect -a tal1_filtered_peaks.bed -b lmo2_filtered_peaks.bed -v > tal1_specific.bed
 ```
 Shared ChIP-seq peaks of files indicate that they bind at the same site. However, without further wet lab experiments, we cannot tell if the TFs compete with each other at these shared binding sites, or if they act collaboratively and one is required for the recruitment of the other TF.
+
