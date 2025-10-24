@@ -12,6 +12,7 @@ Aligning with bowtie (example for 1 file):
 -p specifies parallelization  
 --wrapper basic-0  - specified wrapper script basic-0 (probably custom?)  
 --very-sensitive-local  - preset for searching alignments slower more sensitive and more accurate (Same as: -D 20 -R 3 -N 0 -L 20 -i S,1,0.50)  
+(all flags are availbale here: https://bowtie-bio.sourceforge.net/bowtie2/manual.shtml)  
 
 Sorting with samtools:
 ```bash
