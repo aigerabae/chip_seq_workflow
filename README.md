@@ -2,7 +2,7 @@
 msc bioinformatics, m6, chip-seq tutorial  
 
 
-The purpose of Chromatin immunoprecipitation (ChIP-seq) is to find **regions of DNA that are associated with certain proteins**. For that, proteins are immunoprecipitated with specific antibodies along with the DNA fragments bound by it. That mixture is then cleaned of antibodies and proteins and sequenced. The resulting sequences are aligned to a reference genome and peaks are called (ie the areas where there are substantially more fragments) which indicate that that are was targeted by that protein that was immunoprecipitated. After QC, the genes in those regions are identified and GO ontology or KEGG analysis can be performed to analyze what pathways are affected or linked to that protein.  
+The purpose of Chromatin immunoprecipitation (ChIP-seq) is to find **regions of DNA that are associated with certain proteins**. For that, proteins are immunoprecipitated with specific antibodies along with the DNA fragments bound by it. That mixture is then cleaned of antibodies and proteins and sequenced. The resulting sequences are aligned to a reference genome and **peaks are called** (ie the areas where there are substantially more fragments) which indicate that that are was targeted by that protein that was immunoprecipitated. After QC, the genes in those regions are identified and GO ontology or KEGG analysis can be performed to analyze what pathways are affected or linked to that protein.  
 
 Any sequencing machine will do because the main thing about ChIP-seq is library prep and analysis.  
 
