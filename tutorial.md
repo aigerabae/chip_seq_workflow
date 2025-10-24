@@ -7,6 +7,11 @@ Aligning with bowtie (example for 1 file):
 /rds/bear-apps/2019b/EL8-cas/software/Bowtie2/2.3.5.1-GCC-8.3.0/bin/bowtie2-align-s --wrapper basic-0 -p 8 --very-sensitive-local -x /rds/projects/c/cazierj-ccbservice/Genomes/Mouse/mm10/bowtie2_indices/mm10 -S HB_Tal1_aligned.sam -U ./HB_Tal1.fastq.gz"
 ```
 -x flag specifies index file (used for aligning). You can create the index with bowtie2. You need to download the whole genome of interest, and see bowtie2 documentation.  
+-S specifies name of resulting sam file  
+-U specifies input fastq.qz file  
+-p specifies parallelization  
+--wrapper basic-0  - specified wrapper script basic-0 (probably custom?)  
+--very-sensitive-local  - preset for searching alignments slower more sensitive and more accurate (Same as: -D 20 -R 3 -N 0 -L 20 -i S,1,0.50)  
 
 Sorting with samtools:
 ```bash
